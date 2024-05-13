@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+Methods:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Жизненный цикл (классового) компонента включает в себя 4 фазы
 
-## Available Scripts
+1. Инициализация - Initialization
+На данной фазе компонент начинает свой путь, он рождается. И он устанавливает состояние - state. И у него устанавливаются - props. И обычно это делается в методе - constructor.     
+state/props - constructor
 
-In the project directory, you can run:
+2. Монтирование - Mounting
+На этом этапе компонент монтируется или попадает в DOM. (Виртуальный DOM react).
+Загрузка реального DOM занимает много ресурсов, но в react есть виртуальный DOM, который делает так, что все обновляется быстрее. 
+Монтирование начинается после завершения стадии Инициализации.   
+На этой стадии Render()!!! вызывается первый раз, т.е. наш компонент рендерится или показывается на экране впервый раз.    
 
-### `npm start`
+componentWillMount()      - Устарел в версии 18.
+componentDidMount() +++   Вызывается только 1 раз.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. Обновление - Updating
+Каждый раз, когда меняется состояние компонента происходит повторный рендеринг, те Render() - так же может происходить много раз. 
+Изменение состояния и повторный рендеринг.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+shouldComponentUpdate()
+componentWillUpdate()      - Устарел в версии 18.
+componentDidUpdate()
 
-### `npm test`
+4. Размонтирование - Unmounting
+Стадия размонтирования или смерти компонента. Это самый последний этап жизни компонента, он отключается от DOM или он убирается из DOM. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+componentWillUnMount() +++
 
-### `npm run build`
+- И на этом заканчивается жизненный цикл наших компонентов. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* componentDidMount() 
+If you define the componentDidMount method, React will call it when your component is added (mounted) to the screen. This is a common place to start data fetching, set up subscriptions, or manipulate the DOM nodes.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you implement componentDidMount, you usually need to implement other lifecycle methods to avoid bugs. For example, if componentDidMount reads some state or props, you also have to implement componentDidUpdate to handle their changes, and componentWillUnmount to clean up whatever componentDidMount was doing.
